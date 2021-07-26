@@ -525,7 +525,7 @@ class EviltwinBackend:
 
         if not current_ap:
             ap = eviltwin_models.Accesspoint(
-                bssid=bssid, passphrase=passphrase
+                bssid=bssid, essid=essid, passphrase=passphrase
             )
             database.db.session.add(ap)
         else:
