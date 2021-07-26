@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='vendor/bootstrap-4.4.1-dist/css/bootstrap.min.css') }}" />
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='vendor/bootstrap-icons-1.5.0/bootstrap-icons.css') }}" />
+
+    <!-- Custom CSS  -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin/css/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin/css/base.css') }}" />
+
+    <!-- Custom CSS -->
+    {% block links %}{% endblock %}
+    <title>{% block title %}{% endblock %} - Apex</title>
+</head>
+
+<body>
+    <div id="alert-message" class="alert alert-heading p-3 fixed-top" style="display: none;" role="alert"></div> 
+    <div class="container-fluid pl-0">
+        <div class="row">
+            <div class="col-12 p-0">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-cloudy-night" style="padding: 0.35rem 1.5rem;">
+                    <span class="sidebar-toggle">&#9776;</span>
+
+                    <ul class="cus-nav mr-autos">
+                        <li class="nav-items{% if request.url_rule.endpoint == 'admin.dashboard' %} active {% endif %}">
+                            <a class="nav-links"
+                                href="{% if request.url_rule.endpoint != 'admin.dashboard' %} {{url_for('admin.dashboard') }} {% else %} # {% endif %}">Dashboard</a>
+                        </li>
+
+                        <li class="nav-items{% if request.url_rule.endpoint == 'admin.settings' %} active {% endif %}">
+                            <a class="nav-links"
+                                href="{% if request.url_rule.endpoint != 'admin.settings' %} {{url_for('admin.settings') }} {% else %} # {% endif %}">Settings</a>
+                        </li>
+                    </ul>
+
+                    <ul class="cus-nav ml-auto">
+                        <li class="nav-items">
+                            <a class="nav-links logout text-danger" href="{{ url_for('admin.logout') }}">Logout</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <div>
+                <div class="sidebar bg-cloudy-night">
+                    <ul>
+                        {% block sidebar %} {% endblock %}
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Content container -->
+            <div class="col pl-md-3">
+                {% block content %} {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{{ url_for('static', filename='vendor/jquery-3.4.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap-4.4.1-dist/js/bootstrap.min.js') }}"></script>
+
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='admin/js/globals.js') }}"></script>
+    <script src="{{ url_for('static', filename='admin/js/config.js') }}"></script>
+    <script src="{{ url_for('static', filename='admin/js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='admin/js/sidebar.js') }}"></script>
+    <script src="{{ url_for('static', filename='admin/js/popup.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>

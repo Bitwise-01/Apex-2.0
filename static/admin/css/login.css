@@ -1,0 +1,15 @@
+@import url('main.css');
+
+#error-msg {
+    font-size: 12.5px;
+}
+
+.login-section {
+    background-color: #fff;
+}
+
+.logo {
+    font-family: 'Comfortaa';
+    font-size: 2.3rem;
+    color: #fff;
+}

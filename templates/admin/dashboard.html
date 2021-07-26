@@ -1,0 +1,311 @@
+{% extends "admin/base.html" %} {% block links %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin/css/dashboard.css') }}" />
+
+{% endblock %} {% block title %} Dashboard {% endblock %} {% block sidebar %}
+<li><a class="active" href="#">Handshake</a></li>
+<li><a href="#captured-section" class="rapid-pass">Passwords</a></li>
+{% endblock %} {% block content %}
+
+<div class="row pl-3 pr-1 pl-md-4 pr-md-2">
+    <div class="col">
+        <!-- Interface -->
+        <div class="row">
+            <div class="col ml-1 col-md-9 ml-md-2">
+                <p id="mon-mode-label" class="text-muted mt-2 mb-1 pl-0 label">Monitor Mode</p>
+
+                <div class="pb-4 mb-4">
+                    <div style="position: absolute;">
+                        <div class="interface-container mb-0 pb-3 pl-0">
+                            <input type="text" id="interface" spellcheck="false" placeholder="wlan0" />
+        
+                            <button id="enable-mon-mode" class="btn btn-sm btn-outline-success slow-transform"
+                                style="display: none">
+                                Enable
+                            </button>
+        
+                            <span id="enable-mod-mode-loader" class="pl-3" style="position: relative; display: none">
+                                <div class="spinner-grow text-success" style="position: absolute" role="status"></div>
+                            </span>
+        
+                            <button id="disable-mon-mode" class="btn btn-sm btn-outline-danger slow-transform"
+                                style="display: none">
+                                Disable
+                            </button>
+        
+                            <span id="disable-mod-mode-loader" class="pl-3" style="position: relative; display: none">
+                                <div class="spinner-grow text-danger" style="position: absolute" role="status"></div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Scan output -->
+        <div class="row">
+            <div class="col col-md-12">
+                <div class="row mb-0 pb-0">
+                    <div class="col-7 col-md-9">
+                        <div class="scanner-control p-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="follow-ap" title="Scrolls to the selected accesspoint">
+                                <label class="form-check-label" for="follow-ap" title="Scrolls to the selected accesspoint" style="font-size: 15.5px">
+                                  Follow Accesspoint
+                                </label>
+                            </div>
+                              
+
+                            <div class="row">
+                                <div class="col-1 mr-0 pr-0">
+                                    <button id="refresh-output" class="btn btn-sm btn-dark ml-0  mr-0" title="Refresh output" disabled>
+                                        <i class="bi bi-arrow-repeat pr-0 p-0"></i>
+                                    </button> 
+                                </div>
+                                <div class="col-2 ml-0 pl-0">
+                                    <div class="">
+                                        <div style="position: absolute;">
+                                            <button id="start-scan" class="btn btn-sm btn-primary" style="display: none" disabled>
+                                                Start Scan
+                                            </button>
+                                            <span id="start-scan-loader" class="pl-3 m-0" style="position: relative; display: none">
+                                                <div class="spinner-grow text-primary" style="position: absolute" role="status"></div>
+                                            </span>
+                
+                                            <button id="stop-scan" class="btn btn-sm btn-danger" style="display: none">
+                                                Stop Scan
+                                            </button>
+                
+                                            <span id="stop-scan-loader" class="pl-3 m-0" style="position: relative; display: none">
+                                                <div class="spinner-grow text-danger" style="position: absolute" role="status"></div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-5 col-md-3 text-center text-md-right pb-0 mb-0">
+                        <p class="pt-5 pl-0 pb-0 mb-0 pr-md-5 label text-muted" style="font-size: 13.5px">
+                            Networks: <span id="total-networks" class="text-dark">0</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="p-0 mb-2 table-container" id="networks-display-container">
+                    <table class="table table-dark table-hover m-0">
+                        <thead>
+                            <tr style="text-align: center">
+                                <th scope="col">Bssid</th>
+                                <th scope="col">Essid</th>
+                                <th scope="col">Channel</th>
+                                <th scope="col">Privacy</th>
+                                <th scope="col">Power</th>
+                                <th scope="col">Clients</th>
+                            </tr>
+                        </thead>
+                        <tbody id="networks-display" style="text-align: center"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed output -->
+        <div class="row pt-4">
+            <!-- Accesspoint details -->
+            <div class="col col-md-6">
+                <ul id="tabs-container" class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a href="#" data-target="#details" data-toggle="tab" class="nav-link disabled">Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" data-target="#handshake" data-toggle="tab" class="nav-link disabled">Handshake</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" data-target="#evil-twin" data-toggle="tab" class="nav-link disabled">Eviltwin</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content py-2">
+                    <div class="tab-pane" id="details">
+                        <div class="row">
+                            <div class="col pl-0">
+                                <ul class="pl-5" id="ap-detail-output" style="list-style: none"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="handshake">
+                        <div class="row">
+                            <div class="col pl-0">
+                                <div id="handshake-output" class="pl-5 pt-1">
+                                    <div class="row">
+                                        <div class="col">
+
+                                            <div class="row">
+                                                <div class="col">
+                                                    <p id="unmatched-info-alert" class="text-danger text-center"
+                                                        style="font-size: 13px; display: none;">
+                                                        <span class="text-dark" style="font-weight: bold;">Be
+                                                            Advised:</span>
+                                                        This is currently not the accesspoint we are capturing
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div id="handshake-info" class="pt-2" style="display: none;">
+                                                        <p>Capturing <span id="handshake-info__essid"></span> <span
+                                                                id="handshake-info__bssid"></span></p>
+                                                    </div>
+
+                                                    <p id="handshake-captured" class="text-success" style="display: none;">Handshake Captured</p>
+                                                    
+                                                    <button id="start-handshake" class="btn btn-warning" >
+                                                        Capture
+                                                    </button>
+
+
+
+                                                    <span id="start-handshake-loader" class="pl-3"
+                                                        style="position: relative; display: none">
+                                                        <div class="spinner-grow text-warning"
+                                                            style="position: absolute" role="status"></div>
+                                                    </span>
+
+                                                    <button class="btn btn-danger" id="stop-handshake"
+                                                        style="display: none">
+                                                        Stop
+                                                    </button>
+
+                                                    <span id="stop-handshake-loader" class="pl-3"
+                                                        style="position: relative; display: none">
+                                                        <div class="spinner-grow text-danger" style="position: absolute"
+                                                            role="status"></div>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="evil-twin">
+                        <div class="row">
+                            <div class="col pl-4">
+                                <div id="evil-twin-display" class="px-1">
+                                    <div class="contrainer-fluid" >
+                                        <div class="row pl-3 pt-1" style="position: relative;">
+                                            <div style="position: absolute;">
+                                                <button class="btn btn-sm btn-info" id="start-eviltwin">Enable</button>
+                                                <button class="btn btn-sm btn-danger" id="stop-eviltwin"
+                                                style="display: none;">Disable</button>
+                                                
+                                                <span id="start-eviltwin-loader" class="pl-3"
+                                                    style="position: relative; display: none">
+                                                    <div class="spinner-grow text-info" style="position: absolute" role="status">
+                                                    </div>
+                                                </span>
+                                                
+                                                <span id="stop-eviltwin-loader" class="pl-3"
+                                                    style="position: relative; display: none">
+                                                    <div class="spinner-grow text-danger" style="position: absolute" role="status">
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-5">
+                                            <div class="col mx-auto">
+                                                <p class="text-muted m-0 p-0">Clients</p>
+                                                <div class="p-0 table-container" id="eviltwin-clients-display-container" style="height: 143px !important;">
+                                                    <table class="table table-dark table-hover m-0 table-sm">
+                                                        <thead>
+                                                            <tr style="text-align: center">
+                                                                <th scope="col">Mac</th>
+                                                                <th scope="col">IP</th>
+                                                                <th scope="col">First Seen</th>
+                                                                <th scope="col">Queries</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="eviltwin-clients-display" style="text-align: center"></tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row mt-5 mb-4">
+                                            <div class="col mx-auto">
+                                                <p class="text-muted m-0 p-0">Queries <span id="selected-eviltwin-client"></span> </p>
+                                                <div class="p-0 table-container" id="eviltwin-queries-display-container" style="height: 143px !important;">
+                                                    <table class="table table-dark table-hover m-0 table-sm">
+                                                        <thead>
+                                                            <tr style="text-align: center">
+                                                                <th scope="col">Link</th>
+                                                                <th scope="col">Date</th>
+                                                                <th scope="col">Time</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="eviltwin-queries-display" style="text-align: center"></tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clients details -->
+            <div id="client-details" class="col col-md-6">
+                <p class="text-muted mt-2 mb-1 pl-1 label">Clients</p>
+
+                <div class="p-0 mb-2 table-container">
+                    <table class="table table-dark table-hover m-0">
+                        <thead>
+                            <tr style="text-align: center">
+                                <th scope="col">Mac</th>
+                                <th scope="col">Power</th>
+                                <th scope="col">Packets</th>
+                                <th scope="col">First Seen</th>
+                                <th scope="col">Last Seen</th>
+                            </tr>
+                        </thead>
+                        <tbody id="client-display" style="text-align: center"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Captured Accesspoints -->
+        <div class="row pt-3 mb-3">
+            <div class="col">
+                <div class="p-0 mb-2 table-container">
+                    <table class="table table-dark table-hover m-0" id="captured-section">
+                        <thead>
+                            <tr style="text-align: center">
+                                <th scope="col">Bssid</th>
+                                <th scope="col">Essid</th>
+                                <th scope="col">Passphrase</th>
+                                <th scope="col">Time Captured</th>
+                                <th scope="col">Last Modified</th>
+                            </tr>
+                        </thead>
+                        <tbody id="captured-aps" style="text-align: center"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %} {% block scripts %}
+<script src="{{ url_for('static', filename='admin/js/dashboard.js') }}"></script>
+{% endblock %}

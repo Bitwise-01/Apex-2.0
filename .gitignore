@@ -1,0 +1,14 @@
+# Compiled Python files
+*.pyc
+
+# Compressed files
+*.zip
+
+# Virtual Env
+env_apex
+
+# VsCode 
+.vs*
+
+# Database 
+*.db

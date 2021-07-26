@@ -1,0 +1,9 @@
+.header {
+    color: #000;
+    font-size: 1.1em;
+}
+
+#updates,
+#errors {
+    font-size: 12px;
+}

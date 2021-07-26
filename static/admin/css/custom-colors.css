@@ -1,0 +1,23 @@
+@charset "utf-8";
+
+:root {
+    --dark-white: #f5f5f5;
+    --mid-night: #161616;
+    --cloudy-night: #1f1f1f;
+}
+
+/* Background */
+
+.bg-mid-night {
+    background-color: var(--mid-night);
+}
+
+.bg-cloudy-night {
+    background-color: var(--cloudy-night);
+}
+
+.bg-dark-white {
+    background-color: var(--dark-white);
+}
+
+/* Foreground */

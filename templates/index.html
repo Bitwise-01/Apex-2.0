@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <!-- Bootstrap CSS -->
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='vendor/bootstrap-4.4.1-dist/css/bootstrap.min.css') }}"
+        />
+
+        <!-- Custom CSS  -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+        <title>Firmware Update</title>
+    </head>
+    <body class="bg-dark-white">
+        <div class="container-fluid pl-0">
+            <div class="row">
+                <div class="col-12 p-0">
+                    <nav
+                        class="navbar navbar-expand-lg navbar-dark bg-dark-blue"
+                        style="padding: 1.3rem 1.9rem; padding-bottom: 1rem;"
+                    >
+                        <h4 class="mr-auto text-white logo">Wireless Settings</h4>
+                    </nav>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 p-0">
+                    <nav
+                        class="navbar navbar-expand-lg navbar-dark bg-light-blue"
+                        style="padding: 0.35rem 1.5rem;"
+                    >
+                        <span class="sidebar-toggle">&#9776;</span>
+                        <ul class="cus-nav mr-auto">
+                            <li class="nav-items active">
+                                <a class="nav-links" href="#">Basic</a>
+                            </li>
+
+                            <li class="nav-items">
+                                <a class="nav-links" href="#">Advanced</a>
+                            </li>
+
+                            <li class="nav-items">
+                                <a class="nav-links" href="#">Wizard</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="row">
+                <div>
+                    <div class="sidebar bg-dark-gray">
+                        <ul>
+                            <li><a href="#">Network</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Security</a></li>
+                            <li><a class="active" href="#">Firmware</a></li>
+                            <li><a href="#">Admin</a></li>
+                            <li><a href="#">Tool</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col p-0">
+                    <div class="container-fluid mb-3">
+                        <div class="row pt-2 bg-light-gray">
+                            <h4 style="padding-left: 20%; font-size: 1.3rem;">Firmware</h4>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col text-center">
+                                <h4 class="text-sea-blue">Fireware Update</h4>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <p class="font-weight-bold pl-1 pl-lg-0">Note:</p>
+                                <ol class="notes">
+                                    <li>
+                                        Your router is currently running a firmware version that is
+                                        unstable and out of date.
+                                    </li>
+                                    <li>
+                                        For secuity purposes, your router will deny any and all access to
+                                        the internet until it is updated.
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <div class="row m-auto">
+                            <div class="mt-3 ml-2 ml-lg-0 col-12 col-lg-12 p-0">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row" class="bg-light-gray">
+                                                Installed
+                                            </th>
+                                            <td><i>V1.3.7beta</i></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="bg-light-gray">
+                                                Latest
+                                            </th>
+                                            <td><i>V1.45.2</i></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="bg-light-gray">
+                                                Checksum
+                                            </th>
+                                            <td>9d27f9459499ca8f52473ac575098cca</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col p-0">
+                                <div class="col text-center">
+                                    <button
+                                        type="button"
+                                        id="update-firmware-btn"
+                                        class="btn bg-sea-blue text-white"
+                                        data-toggle="modal"
+                                        data-target="#update-confirm"
+                                    >
+                                        Update Firmware
+                                    </button>
+                                </div>
+
+                                <div
+                                    class="modal fade"
+                                    id="update-confirm"
+                                    tabindex="-1"
+                                    role="dialog"
+                                    aria-hidden="true"
+                                >
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">
+                                                    Verify Update
+                                                </h5>
+                                                <button
+                                                    type="button"
+                                                    class="close"
+                                                    data-dismiss="modal"
+                                                    aria-label="Close"
+                                                >
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form id="update-form" class="px-0 py-3" >
+                                                    <p class="text-secondary" style="font-size: 14px">
+                                                        For security reasons, you must verify your password to update.
+                                                    </p>
+                                                    <div class="form-group">
+                                                        <p id="msg" style="display: none">
+                                                        </p>
+                                                        <label for="password">Enter your Password</label>
+                                                        <input
+                                                            type="password"
+                                                            class="form-control"
+                                                            id="password"
+                                                            placeholder="Password"
+                                                        />
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="col-5 col-md-3 m-auto">
+                                                    <button
+                                                        disabled
+                                                        type="button"
+                                                        id="submit-btn"
+                                                        class="btn btn-block bg-light-blue text-white"
+                                                    >
+                                                        Update
+                                                    </button>
+
+
+                                                    <div id="loader" class="spinner-border text-light-blue ml-lg-4 ml-5" style="display: none">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="{{ url_for('static', filename='vendor/jquery-3.4.1.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='vendor/popper.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='vendor/bootstrap-4.4.1-dist/js/bootstrap.min.js') }}"></script>
+
+        <!-- Custom JS -->
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/popup.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/update.js') }}"></script>
+    </body>
+</html>

@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+bcrypt = "==3.1.7"
+scapy = "==2.4.5"
+Flask = "==1.1.2"
+Flask-Bcrypt = "==0.7.1"
+Flask-Login = "==0.5.0"
+Flask-SQLAlchemy = "==2.4.3"
+SQLAlchemy = "==1.3.18"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"

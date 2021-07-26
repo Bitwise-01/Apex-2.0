@@ -1,0 +1,163 @@
+@charset "utf-8";
+@import url("custom-colors.css");
+
+@font-face {
+  font-family: Roboto;
+  src: url("../font/Roboto-Regular.ttf");
+}
+
+@font-face {
+  font-family: Comfortaa;
+  src: url("../font/Comfortaa-Regular.ttf");
+}
+
+html,
+body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #fff;
+}
+
+body > * {
+  flex-shrink: 0;
+}
+
+.logo {
+  font-family: "Comfortaa";
+  font-weight: bold;
+  font-size: 1.35rem;
+}
+
+.logo:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+ul.cus-nav {
+  padding: 10px 0;
+  margin-bottom: 0;
+}
+
+ul.cus-nav > li {
+  display: inline-block;
+  margin-left: 30px;
+}
+
+ul.cus-nav a {
+  color: #a1a1a1;
+  text-decoration: none;
+}
+ul.cus-nav a:hover {
+  color: #e1e1e1;
+}
+
+ul.cus-nav li.active a {
+  color: #fff !important;
+  text-decoration: underline;
+  text-underline-position: under;
+}
+
+/* Sidebar Starts */
+
+.sidebar-toggle {
+  font-size: 21px;
+  cursor: pointer;
+  color: white;
+  background-color: transparent;
+  margin-top: 5px;
+  outline: none;
+  border: none;
+}
+
+.sidebar-toggle:hover {
+  color: #c1c1c1;
+}
+
+.sidebar-toggle:active {
+  color: #fff;
+}
+
+.sidebar {
+  padding-top: 10px;
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  overflow-x: hidden;
+  transition: 0.8s;
+}
+
+.sidebar li {
+  display: block;
+  padding-top: 15px;
+  text-decoration: none;
+}
+
+.sidebar a {
+  text-decoration: none;
+  display: inline-block;
+  display: block;
+  transition: 0.3s;
+  padding-left: 35px;
+}
+
+.sidebar a {
+  color: #000;
+  font-size: 1.3rem;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  color: var(--sea-blue);
+}
+
+/* Notes Starts */
+.notes li {
+  font-size: 12.5px;
+  margin-bottom: 8px;
+}
+/* Notes Ends  */
+
+table > * {
+  font-size: 12.5px;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+button.close {
+  outline: none;
+}
+
+/* -------------------- Media Queries Start -------------------- */
+
+/* Large Screen */
+@media screen and (min-width: 768px) {
+}
+
+/* Medium Screen */
+@media screen and (min-width: 411px) and (max-width: 767px) {
+}
+
+/* Small Screen */
+@media screen and (min-width: 321px) and (max-width: 410px) {
+  ul.cus-nav > li {
+    margin-left: 15px;
+  }
+}
+
+/* Extra Small Screen */
+@media screen and (max-width: 320px) {
+  ul.cus-nav > li {
+    margin-left: 12px !important;
+  }
+}
+
+/* -------------------- Media Queries Ends -------------------- */

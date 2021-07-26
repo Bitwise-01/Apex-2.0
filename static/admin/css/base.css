@@ -1,0 +1,90 @@
+.logo {
+    font-family: 'Comfortaa';
+    font-size: 1.35rem;
+    color: #fff;
+}
+
+/* --------------- Start Sidebar --------------- */
+
+.sidebar-toggle {
+    font-size: 21px;
+    cursor: pointer;
+    color: white;
+    background-color: transparent;
+    margin-top: 5px;
+    outline: none;
+    border: none;
+}
+
+.sidebar-toggle:hover {
+    color: #c1c1c1;
+}
+
+.sidebar-toggle:active {
+    color: #fff;
+}
+
+.sidebar {
+    padding-top: 0px;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    overflow-x: hidden;
+    transition: 0.8s;
+}
+
+.sidebar li {
+    display: block;
+    padding-top: 15px;
+    text-decoration: none;
+}
+
+.sidebar a {
+    text-decoration: none;
+    display: inline-block;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a {
+    color: #000;
+    font-size: 1.1rem;
+}
+
+/* .sidebar a:hover,
+.sidebar a.active {
+    color: var(--sea-blue);
+} */
+
+div.sidebar a {
+    color: #a1a1a1;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    color: #fff;
+}
+
+/* --------------- End Sidebar --------------- */
+
+/* -------------------- Start Media Queries -------------------- */
+
+/* Large Screen */
+@media screen and (min-width: 768px) {
+}
+
+/* Medium Screen */
+@media screen and (min-width: 411px) and (max-width: 767px) {
+}
+
+/* Small Screen */
+@media screen and (min-width: 321px) and (max-width: 410px) {
+}
+
+/* Extra Small Screen */
+@media screen and (max-width: 320px) {
+}
+
+/* -------------------- End Media Queries -------------------- */

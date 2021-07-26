@@ -1,0 +1,46 @@
+@charset "utf-8";
+@import url('custom-colors.css');
+
+@font-face {
+    font-family: Roboto;
+    src: url('../font/Roboto-Regular.ttf');
+}
+
+@font-face {
+    font-family: Comfortaa;
+    src: url('../font/Comfortaa-Regular.ttf');
+}
+
+html { 
+    scroll-behavior: smooth; 
+}
+
+html,
+body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.slow-transform {
+    -webkit-transition: all 384ms linear;
+    -ms-transition: all 384ms linear;
+    transition: all 384ms linear;
+}
+
+::-webkit-scrollbar {
+    width: 2.5px;
+    height: 2.5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #505050;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--blue);
+}
