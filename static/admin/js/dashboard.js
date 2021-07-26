@@ -80,7 +80,6 @@
 
 	$(document).ready(() => {
 		syncWithServer();
-		getCapturedAps();
 	});
 
 	// ----------------------- Start Sync ----------------------- //
@@ -167,6 +166,9 @@
 				resumeEviltwinState();
 			}
 		});
+
+		// Captured accesspoints
+		getCapturedAps();
 	};
 
 	const resumeHandshakeState = () => {
@@ -1238,6 +1240,7 @@
 		let data = e.data;
 
 		if (data === "finished") {
+			stopEviltwin(false);
 			return;
 		}
 
@@ -1286,7 +1289,6 @@
 			url: "/eviltwin/start-process",
 		}).done((resp) => {
 			startEviltwinLoader.hide();
-			syncWithServer();
 
 			if (resp.status !== 1) {
 				fadingAlert("Failed to start eviltwin", 1);
@@ -1302,6 +1304,7 @@
 
 			resumeEviltwinState();
 			startEviltwinOutput();
+			syncWithServer();
 		});
 	};
 
@@ -1317,7 +1320,6 @@
 			url: "/eviltwin/stop-process",
 		}).done((resp) => {
 			stopEviltwinLoader.hide();
-			syncWithServer();
 
 			if (resp.status !== 1) {
 				stopEviltwinBtn.show();
@@ -1333,6 +1335,7 @@
 
 			resumeEviltwinState();
 			stopEviltwinOutput();
+			syncWithServer();
 		});
 	};
 

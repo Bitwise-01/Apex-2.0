@@ -640,7 +640,7 @@ class EviltwinBackend:
             resp.msg = "Failed to stop evil twin"
             return resp
 
-        EviltwinBackend.__eviltwin = None
+        # EviltwinBackend.__eviltwin = None
         resp.msg = "Successfully stopped evil twin"
         resp.status = Resp.SUCCESS_CODE
 

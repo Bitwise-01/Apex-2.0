@@ -1,1 +1,1 @@
-const config={'admin_url_prefix': 'e07bbda7-64d149a838db01f4-f8a0fc15'};
+const config={'admin_url_prefix': '8b9ee43e-323ee38683d10b00-331916e3'};
